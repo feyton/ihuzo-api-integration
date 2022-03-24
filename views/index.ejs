@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css" class="css">
+</head>
+
+<body>
+
+
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <form>
+        <div>
+            Your order is <%= amount %>  Rwf
+        </div>
+        <button type="button" id="start-payment-button" onclick="makePayment()">Pay Now</button>
+    </form>
+    <script>
+        function makePayment() {
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK_TEST-1e42c43812ebe238f72c23526c120566-X",
+                tx_ref: "<%= tx_id %>" ,
+                amount: "<%= amount %>" ,
+                currency: "RWF",
+                payment_options: "card, banktransfer, mobilemoneyrwanda",
+                redirect_url: "http://localhost:3000/success",
+                meta: {
+                    consumer_id: 23,
+                    consumer_mac: "92a3-912ba-1192a",
+                },
+                customer: {
+                    email: "tumbafabruce@gmail.com",
+                    phone_number: "08102909304",
+                    name: "Rose DeWitt Bukater",
+                },
+                customizations: {
+                    title: "Feyton Inc",
+                    description: "Payment for an awesome cruise",
+                    logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+                },
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>
