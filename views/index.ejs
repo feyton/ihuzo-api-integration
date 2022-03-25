@@ -5,42 +5,108 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>IHUZO| API Integration</title>
     <link rel="stylesheet" href="/main.css" class="css">
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 
-<body>
+<body class="flex  items-center flex-col">
 
 
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <form>
+    <div class=" card">
+        <h1>API Integration</h1>
+        <p>This is a demonstration of the flutterwave integration with differnt methods</p>
+        <h2>Scenarios</h2>
+        <hr>
         <div>
-            Your order is <%= amount %>  Rwf
+            <div class="head">
+                <h3>1. Flutter Inline</h3>
+            </div>
+            <p>Demonstrated here, it charge the custom with flutterwave form handling all logics and use public API.</p>
+            <div class="card">
+                <form class="user-form" action="#none">
+                    <h3>Fill in the information and click pay</h3>
+                    <input id="Name" type="text" name="name" placeholder="Name">
+                    <input placeholder="Your email" type="email" name="email" id="email">
+                    <input title="Amount between 100 - 50000" pattern="[0-9]{2,3}" onkeyup="setAmount(this.value)"
+                        id="amount" type="number" name="amount" placeholder="Amount">
+                </form>
+                <form class="mt-3">
+                    <div>
+                        Your order is <span id="amount-value">
+                            ...
+                        </span> Rwf
+                    </div>
+
+                    <div class="pay-btn">
+                        <button class="btn btn-primary" type="button" id="start-payment-button"
+                            onclick="makePayment()">Pay
+                            Now</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
-        <button type="button" id="start-payment-button" onclick="makePayment()">Pay Now</button>
-    </form>
+        <hr>
+        <div>
+            <h3>2. Flutter Standard</h3>
+            <p>Test IT Here</p>
+            <a href="/pay">
+                <button class="btn btn-primary">Flutter Standard</button>
+            </a>
+        </div>
+    </div>
+
     <script>
+        function setAmount(value) {
+            console.log(value)
+            const REG_EX = /[0-9]/g
+            if (value.match(REG_EX)) {
+                document.getElementById("amount-value").innerText = value
+            } else {
+            }
+
+
+        }
+        function getValues(form) {
+            const name = form.name.value || "Testing name"
+            const email = form.email.value || "user@gmail.com"
+            const amount = parseInt(form.amount.value) || 2000
+
+            return { name, email, amount }
+        }
         function makePayment() {
+            const amount = document.getElementById("amount").value || 4000
+            document.querySelector(".pay-btn").innerHTML = `
+            <div class="response lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <span class="ld-text">Redirecting...</span>
+            </div>
+            `
+
+            const info = getValues(document.querySelector(".user-form"))
             FlutterwaveCheckout({
-                public_key: "FLWPUBK_TEST-1e42c43812ebe238f72c23526c120566-X",
-                tx_ref: "<%= tx_id %>" ,
-                amount: "<%= amount %>" ,
+                public_key: "<%= API_KEY %>",
+                tx_ref: "<%= tx_id %>",
+                amount: amount,
                 currency: "RWF",
-                payment_options: "card, banktransfer, mobilemoneyrwanda",
-                redirect_url: "http://localhost:3000/success",
+                payment_options: "mobilemoneyrwanda, card",
+                redirect_url: "<%= redirect %> ",
                 meta: {
                     consumer_id: 23,
                     consumer_mac: "92a3-912ba-1192a",
                 },
                 customer: {
-                    email: "tumbafabruce@gmail.com",
+                    email: info.email,
                     phone_number: "08102909304",
-                    name: "Rose DeWitt Bukater",
+                    name: info.name,
                 },
                 customizations: {
                     title: "Feyton Inc",
-                    description: "Payment for an awesome cruise",
-                    logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+                    description: "Payment for IHUZO Services",
+                    logo: "https://feyton.co.rw/static/img/favicon.png",
                 },
             });
         }

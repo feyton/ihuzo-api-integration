@@ -1,7 +1,140 @@
 body {
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Lexend";
+  background-color: rgb(238, 235, 235);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lexend";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  padding: 1rem 3rem;
+  border-radius: 20px;
+  box-shadow: 2px 4px 2px gray;
+  background-color: #fff;
+}
+
+.user-form {
+  display: block;
+
+}
+
+.user-form input {
+  display: block;
+  padding: .3rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid rgb(14, 50, 104);
+  margin: .2rem 0rem;
+}
+
+.btn {
+  border-radius: 10px;
+  padding: .5rem 1rem;
+  text-align: center;
+  width: fit-content;
+  background-color: rgb(22, 71, 117);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin: .3rem 1rem;
+}
+
+.btn:hover {
+  color: rgb(223, 217, 217);
+}
+
+.mt-3 {
+  margin-top: 2rem;
+}
+
+.input-div {
+  position: relative;
+  padding: .5rem 0rem;
+}
+
+.input-div label {
+  position: absolute;
+  left: 20px;
+  top: 7px;
+}
+
+
+/* SPINNER */
+.lds-ring {
+  position: relative;
+  padding: 5px 0px 20px 0px;
+  height: fit-content;
+  background-color: rgba(0, 153, 255, 0.507);
+  width: fit-content;
+  border-radius: 20px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  margin: 1px;
+  border: 8px solid rgb(22, 84, 119);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(23, 59, 68) transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ld-text {
+  margin: auto 50px;
+}
+
+h1 {
+  font-size: 1.2rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: .8rem;
+}
+.btn-pay {
+  padding: .5rem 1rem;
+  color: white;
+  background-color: green;
+  font-family: "Lexend";
+  font-weight: bolder;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
 }

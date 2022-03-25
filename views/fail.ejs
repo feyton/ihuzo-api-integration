@@ -26,7 +26,7 @@
     }
 
     i {
-        color: #9ABC66;
+        color: #8f1c1c;
         font-size: 100px;
         line-height: 200px;
         margin-left: -15px;
@@ -40,26 +40,18 @@
         display: inline-block;
         margin: 0 auto;
     }
-
-    .tx-info {
-        text-align: left;
-    }
 </style>
 
 <body>
     <div class="card">
         <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-            <i class="checkmark">✓</i>
+            <i class="checkmark">X</i>
         </div>
-        <h1>Success</h1>
-        <h2>
-            Dear <%= customer.name %>,
-        </h2>
-        <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
-        <p>Check the confirmation email sent to: <%= customer.email %>
-        </p>
-        <div class="tx-info">
-            <h2>Transaction Details</h2>
+        <h1>Failed</h1>
+        <h2> </h2>
+        <p>Your payment request was not successfully.</p>
+        <div>
+            <h2>Transaction info</h2>
             <ul>
                 <li><b>Status: </b>
                     <%= status %>
@@ -67,16 +59,9 @@
                 <li><b>Ref: </b>
                     <%= tx_ref %>
                 </li>
-                <li><b>Payment Methond: </b>
-                    <%= auth_model %>
-                </li>
-                <li>Amount: <%= charged_amount %>
-                </li>
-                <li>Received amount: <%= amount_settled %>
-                </li>
+                
             </ul>
         </div>
-        <a href="/">Back Home</a>
     </div>
 </body>
 
