@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IHUZO| Standard</title>
     <link rel="stylesheet" href="main.css" class="css">
+    <meta name="description" content="Payment API integration wth node.js">
+    <meta name="image" content="https://feyton.co.rw/static/img/favicon.png">
+    <link rel="shortcut icon" href="https://feyton.co.rw/static/img/favicon.png" type="image/x-icon">
 
 </head>
 
@@ -68,11 +71,28 @@
                     <span class="ld-text">Sending...</span>
                 </div>
                 `
-                const response = await axios.post("/pay", object)
+                try {
+                    const response = await axios.post("/pay", object);
 
-                document.querySelector(".pay-btn").innerHTML = `
+                    document.querySelector(".pay-btn").innerHTML = `
                 <a href="${response.data.link}" class="btn-pay">Proceed to payment</a>
+                <div style="margin-top: 20px;" class="note">
+                    <b>Note: </b> Use <b>123456</b> as an <b>OTP</b> for testing on next pages.
+                </div>
                 `
+
+                } catch (err) {
+                    document.querySelector(".pay-btn").innerHTML = `
+               
+                <div style="margin-top: 20px;" class="note">
+                    Something went wrong. Try again
+                </div>
+                <button type="submit" class="btn btn-primay">Try again payment</button>
+                `
+                }
+
+
+
             }
 
 
